@@ -1,0 +1,83 @@
+# Biology {#biology}
+
+> Biology identifier is [bi]
+
+As biological features can be gather multiple times at each time point (i.e. several times during index hospitalization, or follow-up), they are gathered in a separate instrument. Naming process is standard, with
+
+-   The second item referring to the biological parameter
+
+-   The third item referring to the chronological position of the dosage.
+
+E.g. bi_bnp_ini_value, refers to the BNP initial value
+
+There are some biological features that do not pertain to a timing (e.g. normal value, or ever acquired status). Note that this is a bit twisted, since normal value may change if the patient gets his/her labs in a different place after being discharged.
+
+## Abbreviations
+
++-----------------+--------------------------------------------------------------------------------------------+
+| Abbreviation(s) | Feature                                                                                    |
++=================+============================================================================================+
+| `uln`           | Upper limit of normal                                                                      |
++-----------------+--------------------------------------------------------------------------------------------+
+| Biology timings |                                                                                            |
++-----------------+--------------------------------------------------------------------------------------------+
+| `ini`           | Initial value (can be slightly before or after the index cardiotoxicity date)              |
++-----------------+--------------------------------------------------------------------------------------------+
+| `bimm`          | Before first immunosuppressant was introduced during index hospitalization                 |
++-----------------+--------------------------------------------------------------------------------------------+
+| `pk`            | Peak value of the parameter during index hospitalization                                   |
++-----------------+--------------------------------------------------------------------------------------------+
+| `mr`            | Most recent value (possibly after index hospitalization discharge)                         |
++-----------------+--------------------------------------------------------------------------------------------+
+| Blood chemistry |                                                                                            |
++-----------------+--------------------------------------------------------------------------------------------+
+| `bnp`           | Brain Natriuretic Peptide                                                                  |
++-----------------+--------------------------------------------------------------------------------------------+
+| `ntpbnp`        | Nt-pro-BNP                                                                                 |
++-----------------+--------------------------------------------------------------------------------------------+
+| `crp`           | C reactive protein                                                                         |
++-----------------+--------------------------------------------------------------------------------------------+
+| `cre`           | creatinin                                                                                  |
++-----------------+--------------------------------------------------------------------------------------------+
+| `cpk`           | CK or CPK                                                                                  |
++-----------------+--------------------------------------------------------------------------------------------+
+| `ckmb`          | CK-MB                                                                                      |
++-----------------+--------------------------------------------------------------------------------------------+
+| `trop`          | Troponin (either I or T)                                                                   |
++-----------------+--------------------------------------------------------------------------------------------+
+| `tropi`         | Troponin I                                                                                 |
+|                 |                                                                                            |
+|                 | Be very careful that these parameters are used only if BOTH troponins were used.           |
+|                 |                                                                                            |
+|                 | When only one troponin is used, `unit` and `uln` are flagged with the `trop` abbreviation. |
++-----------------+--------------------------------------------------------------------------------------------+
+| `tropt`         | Troponin T                                                                                 |
+|                 |                                                                                            |
+|                 | Same comment                                                                               |
++-----------------+--------------------------------------------------------------------------------------------+
+| Blood formula   |                                                                                            |
++-----------------+--------------------------------------------------------------------------------------------+
+| `cbc`           | Complete blood count                                                                       |
++-----------------+--------------------------------------------------------------------------------------------+
+| `neu`           | Neutrophil count                                                                           |
++-----------------+--------------------------------------------------------------------------------------------+
+| `lym`           | Lymphocyte count                                                                           |
++-----------------+--------------------------------------------------------------------------------------------+
+| `mon`           | Monocyte count                                                                             |
++-----------------+--------------------------------------------------------------------------------------------+
+| `eos`           | Eosinophil count                                                                           |
++-----------------+--------------------------------------------------------------------------------------------+
+| `bas`           | Basophil count                                                                             |
++-----------------+--------------------------------------------------------------------------------------------+
+| `igc`           | Immature granulocyte count                                                                 |
++-----------------+--------------------------------------------------------------------------------------------+
+| `pla`           | Platelet count                                                                             |
++-----------------+--------------------------------------------------------------------------------------------+
+
+## Normal values and ratios
+
+Most normal values of biological parameters are different from one lab to another. Also, users may report bio vars according to different scales.
+
+Examples: troponin upper limit of normal may range from \~ 0.01 to \~ 50. Complete blood count can be reported in G/L or 10\^-3/µL (even if the var field asked for reporting with one of them).
+
+It is advised to express biological parameters according to their normal value upper or lower limits if known, or to contrast them into ratios that get rid of the unit (example: neutrophil to lymphocyte ratio)

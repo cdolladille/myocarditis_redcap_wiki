@@ -1,0 +1,32 @@
+--- 
+title: "Myocarditis Redcap wiki"
+author: "Charles Dolladille"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography:
+- book.bib
+- packages.bib
+description: |
+  This is a reference book that describes the data structure and variables and the common data management schemes used for the analysis of the Myocarditis Redcap from Vanderbilt University.
+link-citations: yes
+---
+
+# About
+
+This is a reference document that describes the data structure and variables and the common data management schemes used for the analysis of the Myocarditis Redcap from Vanderbilt University.
+
+## Usage 
+
+This document is intended as a cheatsheet, for fast and easy reminder of data structure and variable names, and how to use them.
+
+## Target users
+
+Cardiologist and data manager researchers from Drs Moslehi and Salem teams.
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```

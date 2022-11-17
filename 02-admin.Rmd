@@ -1,0 +1,11 @@
+# Admin {#admin}
+
+> Admin variable identifier is [ad]
+
+It is the first chapter but actually, administrative variables are quite easy to use.
+
+There is a few logical branching here. If you want to create a country-level variable, you will need to gather back several subvariables including `reporting_region`, (USA are a stand alone in this variable) `european_countries`, `african_countries`, `asian_countries`, `australia_countries`. These variables are mutually exclusive (except for reporting_region).
+
+Useful when you want to draw the world map of contributing countries.
+
+Please look at the [contributors and contributing centers](#contrib) section for more details.

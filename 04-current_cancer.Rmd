@@ -1,0 +1,18 @@
+# Current line {#current_line}
+
+> Current line identifier is [cl]
+
+## Definition
+
+The current line is the most recently administered cure of anticancer drugs that contains immune checkpoint inhibitors. It can be ongoing at the time of index cardiotoxicity, or may have been interrupted.
+
+## Abbreviations
+
+Abbreviations for immune checkpoint inhibitor drugs and classes are the same as in [the previous line instrument](#previous_line_ab_table).
+
+Here is a list of abbreviations used in several variables in the current line instrument.
+
+| Abbreviation(s) | Feature                                 |
+|-----------------|-----------------------------------------|
+| `1stdrug`       | Refers to the 1st infusion of the drug  |
+| `lastdrug`      | Refers to the last infusion of the drug |

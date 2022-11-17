@@ -1,0 +1,105 @@
+---
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+# Common use cases {#use_case}
+
+## Calculated versus manual vars {#calc_manual_var}
+
+Many numeric variables can be entered in two ways:
+
+-   **calculated var:** The user provides dates (e.g., date of birth,
+    date of index cardiotoxicity), and the variable is automatically
+    calculated from these dates (e.g. age as the difference between
+    index cardiotoxicity date and date of birth).
+
+-   **manual var:** The user could not provide dates, but had a free
+    text field to input the value.
+
+As a result, 2 variables contain the same data. They are not mutually
+exclusive, which means an observation can have a value for the 2
+variables (e.g. the user provided both dates, which allows for automated
+computation in the calculated var, and also entered age in the manual
+var free text variable). There has to be a rule of thumb to choose which
+variable is to be used in the analysis. Here is ours:
+
+> Calculated vars are preferred over manual vars
+
+This means that, for a single case:
+
+-   If the calculated var is available, it will be retained.
+
+-   Else, if the manual var is available, it will be retained.
+
+-   Else, if none are available, the value is missing.
+
+Here is an implementation of this simple logic into an R function
+
+```{r}
+numvar_uni <- # Numeric variables unifier
+  function( # used to organize data entered from 2 variables, currently its a prioritization
+    var1, # a quasi quoted name of column from data. Usually, one is the calculated var, one is the manual var, var1 will be prioritize over var2
+    var2 # also a quasi quoted name
+    # underlying data.frame data argument is omitted
+  ){
+    var1 <- rlang::enexpr(var1)
+    var2 <- rlang::enexpr(var2)
+    
+    ex <- rlang::expr(dplyr::case_when(
+      !is.na(!!var1) ~ as.numeric(!!var1),
+      !is.na(!!var2) ~ as.numeric(!!var2),
+      TRUE ~ NA_real_
+    ))
+    
+    ex
+  }
+```
+
+## Calculated and manual vars identifiers
+
+> For a manual var, the associated calculated var has the **`__c`**
+> suffix.
+
+Example:
+
+| manual var                              | calculated var |
+|-----------------------------------------|----------------|
+| `p_age` (patient age, from instrument admin) | `p_age__c`     |
+
+## Free text variables {#freetext_var}
+
+Users are often provided additional fields in the case their patient
+falls out of the checkboxes. For example, a patient may have experienced
+an auto-immune disease that is not listed in the `p_ai_` vars.
+
+In this case, the user can check the `p_ai_other` box. When this box is
+checked, the `p_ai_other__ft` variable is displayed. It is a free text
+field where the user can input additional data (e.g. Bullous
+pemphigoid).
+
+> Free text vars have the same name as the branching logic displayer,
+> with a `__ft` suffix.
+
+At the moment, data from free text variables is not used to compute
+additional variables for 2 main reasons:
+
+-   There are few data in these vars
+
+-   Data quality checking requires additional time consuming ressources
+    that cannot be applied to a general framework
+
+> We recommend you use free text variables only if their data closely
+> match your research question.
+
+## Sex
+
+At this stage, it is a binary variable with value
+
+-   1 for man
+
+-   2 for woman
+
+It is usually easier to use a variable named "man" or "woman", built
+from the sex variable, to remember how to interprate model results.

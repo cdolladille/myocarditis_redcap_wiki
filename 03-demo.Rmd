@@ -1,0 +1,90 @@
+# Demographics {#demo}
+
+> Demographics variable identifier is [p] for patient
+
+## Abbreviations
+
+Here is a list of abbreviations used in several variables in the demo instrument.
+
++--------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
+| Abbreviation(s)    | Feature                                                                                                                                      |
++====================+==============================================================================================================================================+
+| `cancer_hx`        | Cancer history: refers to prior cancer(s) the patient had in his/her life before the one actively treated with immune checkpoint inhibitors. |
+|                    |                                                                                                                                              |
+| `cx`               | `cx1`, `2`, `3`... Refer to features for specifics types of cancer (1 is Bladder cancer, 2 is Breast cancer, etc.)                           |
++--------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
+| `pl`               | Previous line: this is a concept to refer to treatments received either for prior cancer(s) **or** **the current cancer** in previous lines  |
+|                    |                                                                                                                                              |
+|                    | Obviously falls inbetween two instruments (demographics and current cancer)                                                                  |
++--------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
+| `autoimmune_hx`    | Auto-immune history: prior auto-immune disease                                                                                               |
+|                    |                                                                                                                                              |
+| `ai`<!--#  -->     |                                                                                                                                              |
++--------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
+| `organ_transplant` | Organ transplantation history                                                                                                                |
+|                    |                                                                                                                                              |
+| `ot`               |                                                                                                                                              |
++--------------------+----------------------------------------------------------------------------------------------------------------------------------------------+
+
+## Calculated variables
+
+You can check the difference between calculated and manual vars [here](#calc_manual_var).
+
+| manual var | calculated var |
+|------------|----------------|
+| `p_age`    | `p_age__c`     |
+| `p_bmi`    | `p_bmi__c`     |
+
+## Derived variables
+
+### Categorical Body Mass Index and overweight or obese
+
+For the latter, read as is patients BMI\>25 or not?
+
+```{r}
+p_bmi_cat = expr(
+  case_when(
+      p_bmi < 18.5 ~ "underweight",
+      dplyr::between(p_bmi, 18.5, 25) ~ "normal_weight",
+      dplyr::between(p_bmi, 25, 30) ~ "overweight",
+      p_bmi > 30 ~ "obese"
+    ))
+
+p_overweight_obese = expr(
+  if_else(
+      p_bmi > 25, 
+      1, 
+      0
+    )
+)
+```
+
+### Cardiovascular risk factors
+
+At least one traditional cardiovascular risk factor
+
+```{r}
+p_cv_risk = expr(
+  pmax(
+      p_lipid_chol,
+      p_tobacco_anytime,
+      p_diabetes2,
+      p_hypertension,
+      na.rm = TRUE
+    )
+  )
+```
+
+## Medications
+
+There is always an ambiguity with checkboxes: if nothing is checked, you can't tell if the answer is negative to your question, or if the data is missing.
+
+For example, if you have two checkboxes for medications
+
+-   Beta-blockers
+
+-   Aspirin
+
+And say the first is checked and the second is not. In this case, its easy to say the patient is taking betablockers, but what about aspirin? Maybe the patient is not taking aspirin, or maybe data is missing and the user did not checked the box. This could be the case if a patient addressed to the hospital forgets to bring his/her prescription and do not remember precisely the name of the medications. On the other hand, you may often retrieve the complete list by calling the pharmacist or if a related finally brings the prescription during the hospital stay.
+
+> It is assumed that medication list is complete (no missing data) if the `p_meds_any` variable is checked.

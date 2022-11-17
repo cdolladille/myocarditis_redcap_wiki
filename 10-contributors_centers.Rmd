@@ -1,0 +1,100 @@
+# Contributors and contributing centers {#contrib}
+
+To ensure proper identification and tracking of contributors and contributing centers, we created separated excel files. We will use dummy contributors to illustrate this page.
+
+Note that Redcap does allow for an easier way to do so, by adding contributors as regular users and using data access groups. At this time, this option was not retained for this project.
+
+## Contributors
+
+Contributors have been standardized on November 2022 so that
+
+-   Typos were corrected in email addresses
+
+-   Contact with \>1 email address were asked to choose one
+
+-   Outdated contacts were replaced with current ones, according to institution
+
+-   Contributors were assigned to a standardized contributing center (see below)
+
+The excel has 2 sheets: one to tag old erroneous mails to the good one
+
+```{r, echo=FALSE}
+contributors_tag <- data.frame(
+  old_mail = c("joe1@aphp.fr", "salem@aphp.fr", "john1@ucsf.edu", "power@ucsf.edu"),
+  email_tag = c("salem@aphp.fr", "salem@aphp.fr", "john_pwr@ucsf.edu", "john_pwr@ucsf.edu")
+)
+
+knitr::kable(contributors_tag, caption = "A correspondence table between erroneous mails and good ones")
+```
+
+The second to match contributors to a contributing center (here called an institution)
+
+```{r, echo=FALSE}
+contributors <- data.frame(
+  email_tag = c("salem@aphp.fr", "john_pwr@ucsf.edu"),
+  institution_tag = c("Sorbonne University", "UCSF")
+)
+
+knitr::kable(contributors, caption = "A correspondence table between contributors and their institution")
+```
+
+Special cases: Some contributors might have been contacted for a case far outside of their usual health care perimeter (e.g. Dr Salem for a Belgian patient). In this case, the contributor has an additional special row from the external hospital contact.
+
+```{r, echo=FALSE}
+contributors_2sites <- data.frame(
+  email_tag = c("salem@aphp.fr", "salem@aphp.fr"),
+  institution_tag = c("Sorbonne University", "Belgian Hospital")
+)
+
+knitr::kable(contributors_2sites, caption = "Special case: this contributor has more than one institution")
+```
+
+## Contributing centers (institutions)
+
+Contributing centers have also been standardized on November 2022
+
+-   Duplicates were coerced to a unique name (e.g. UCSF, UC San Francisco... All to UCSF)
+
+-   Cities, counties and countries were sought for each contributing center
+
+```{r, echo=FALSE}
+centers_tag <- data.frame(
+  old_institution = c("APHP Pitié Salpetriere", "Sorbonne", "UCSF", "UC San Francisco"),
+  institution_tag = c("Sorbonne University", "Sorbonne University", "UCSF", "UCSF")
+)
+
+knitr::kable(centers_tag, caption = "A correspondence table between erroneous institution names and good ones")
+```
+
+```{r, echo=FALSE}
+centers <- data.frame(
+  institution_tag = c("Sorbonne University", "UCSF"),
+  ad_country = c("France", "United States"),
+  ad_admin = c("", "California"),
+  ad_city = c("Paris", "San Francisco")
+)
+
+knitr::kable(centers, caption = "A correspondence table between an institution name and its geographical place")
+```
+
+## Integration to Redcap
+
+These old names were completely removed from the records up to November 2022. Note that geographical data of institution is still located outside of the Redcap, in a separate excel file.
+
+However, it does not imply that newer records will comply to this standardization. Three options here
+
+-   Add contributors as regular users to Redcap, so their mail and institution can be easily constrained
+
+-   Add coercion to fields related to emails and institutions (e.g., reporter can only choose in a prespecified list of institutions).
+
+-   Keep updating the database by hand periodically
+
+The first two options almost are the same, in the way that new external physicians will have to be registered first, before posting cases. This would add some delay before they can enter their cases, although probably not that much, and could discourage them from contributing. The counterpart is much more easy process to identify and track them thereafter.
+
+## BNPV and donotcontact\@perdrmoslehi.com
+
+The French National Pharmacovigilance Database called BNPV (Base Nationale de Pharmacovigilance) was queried at the early stage of the redcap history. A few cases (5 identified at the moment) were reported in the redcap. They were assigned a dummy mail **bnpv\@itsnotatruemail.fr** and an arbitrary institution in the geographical perimeter of the reporting center.
+
+Similarly, published cases were reported in the database. These cases have a dummy mail **donotcontact\@perdrmoslehi.com**.
+
+Those 2 mails are just here to tell you: don't try to reach out a contact for these cases, you won't find it.

@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 9 Common use cases | Myocarditis Redcap wiki</title>
+  <meta name="description" content="This is a reference book that describes the data structure and variables and the common data management schemes used for the analysis of the Myocarditis Redcap from Vanderbilt University." />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 9 Common use cases | Myocarditis Redcap wiki" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This is a reference book that describes the data structure and variables and the common data management schemes used for the analysis of the Myocarditis Redcap from Vanderbilt University." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 9 Common use cases | Myocarditis Redcap wiki" />
+  
+  <meta name="twitter:description" content="This is a reference book that describes the data structure and variables and the common data management schemes used for the analysis of the Myocarditis Redcap from Vanderbilt University." />
+  
+
+<meta name="author" content="Charles Dolladille" />
+
+
+<meta name="date" content="2022-11-10" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="previous_line.html"/>
+<link rel="next" href="multi_instrument_var.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Myocarditis Redcap wiki</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#usage"><i class="fa fa-check"></i><b>1.1</b> Usage</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#target-users"><i class="fa fa-check"></i><b>1.2</b> Target users</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introducing the database</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#what-is-in-the-redcap"><i class="fa fa-check"></i><b>2.1</b> What is in the Redcap?</a></li>
+<li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#variables-naming-rules"><i class="fa fa-check"></i><b>2.2</b> Variables naming rules</a></li>
+<li class="chapter" data-level="2.3" data-path="intro.html"><a href="intro.html#data_structure"><i class="fa fa-check"></i><b>2.3</b> Data structure</a></li>
+<li class="chapter" data-level="2.4" data-path="intro.html"><a href="intro.html#multi-instrument-variables"><i class="fa fa-check"></i><b>2.4</b> Multi-instrument variables</a></li>
+<li class="chapter" data-level="2.5" data-path="intro.html"><a href="intro.html#root-variables"><i class="fa fa-check"></i><b>2.5</b> Root variables</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="admin.html"><a href="admin.html"><i class="fa fa-check"></i><b>3</b> Admin</a></li>
+<li class="chapter" data-level="4" data-path="demo.html"><a href="demo.html"><i class="fa fa-check"></i><b>4</b> Demographics</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="demo.html"><a href="demo.html#abbreviations"><i class="fa fa-check"></i><b>4.1</b> Abbreviations</a></li>
+<li class="chapter" data-level="4.2" data-path="demo.html"><a href="demo.html#calculated-variables"><i class="fa fa-check"></i><b>4.2</b> Calculated variables</a></li>
+<li class="chapter" data-level="4.3" data-path="demo.html"><a href="demo.html#derived-variables"><i class="fa fa-check"></i><b>4.3</b> Derived variables</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="demo.html"><a href="demo.html#categorical-body-mass-index-and-overweight-or-obese"><i class="fa fa-check"></i><b>4.3.1</b> Categorical Body Mass Index and overweight or obese</a></li>
+<li class="chapter" data-level="4.3.2" data-path="demo.html"><a href="demo.html#cardiovascular-risk-factors"><i class="fa fa-check"></i><b>4.3.2</b> Cardiovascular risk factors</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="demo.html"><a href="demo.html#medications"><i class="fa fa-check"></i><b>4.4</b> Medications</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="current_line.html"><a href="current_line.html"><i class="fa fa-check"></i><b>5</b> Current line</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="current_line.html"><a href="current_line.html#definition"><i class="fa fa-check"></i><b>5.1</b> Definition</a></li>
+<li class="chapter" data-level="5.2" data-path="current_line.html"><a href="current_line.html#abbreviations-1"><i class="fa fa-check"></i><b>5.2</b> Abbreviations</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="index_c.html"><a href="index_c.html"><i class="fa fa-check"></i><b>6</b> Index cardiotoxicity</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="index_c.html"><a href="index_c.html#abbreviations-2"><i class="fa fa-check"></i><b>6.1</b> Abbreviations</a></li>
+<li class="chapter" data-level="6.2" data-path="index_c.html"><a href="index_c.html#biological-features"><i class="fa fa-check"></i><b>6.2</b> Biological features</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="index_h.html"><a href="index_h.html"><i class="fa fa-check"></i><b>7</b> Index hospitalization</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="index_h.html"><a href="index_h.html#abbreviations-3"><i class="fa fa-check"></i><b>7.1</b> Abbreviations</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="previous_line.html"><a href="previous_line.html"><i class="fa fa-check"></i><b>8</b> Previous line</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="previous_line.html"><a href="previous_line.html#definition-1"><i class="fa fa-check"></i><b>8.1</b> Definition</a></li>
+<li class="chapter" data-level="8.2" data-path="previous_line.html"><a href="previous_line.html#previous_line_ab_table"><i class="fa fa-check"></i><b>8.2</b> Abbreviations</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="use_case.html"><a href="use_case.html"><i class="fa fa-check"></i><b>9</b> Common use cases</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="use_case.html"><a href="use_case.html#calc_manual_var"><i class="fa fa-check"></i><b>9.1</b> Calculated versus manual vars</a></li>
+<li class="chapter" data-level="9.2" data-path="use_case.html"><a href="use_case.html#calculated-and-manual-vars-identifiers"><i class="fa fa-check"></i><b>9.2</b> Calculated and manual vars identifiers</a></li>
+<li class="chapter" data-level="9.3" data-path="use_case.html"><a href="use_case.html#freetext_var"><i class="fa fa-check"></i><b>9.3</b> Free text variables</a></li>
+<li class="chapter" data-level="9.4" data-path="use_case.html"><a href="use_case.html#sex"><i class="fa fa-check"></i><b>9.4</b> Sex</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="multi_instrument_var.html"><a href="multi_instrument_var.html"><i class="fa fa-check"></i><b>10</b> Multi-instrument variables</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="multi_instrument_var.html"><a href="multi_instrument_var.html#date-and-time-variables"><i class="fa fa-check"></i><b>10.1</b> Date and time variables</a></li>
+<li class="chapter" data-level="10.2" data-path="multi_instrument_var.html"><a href="multi_instrument_var.html#time-to-cardiotoxicity-onset-from-immune-checkpoint-inhibitor-introduction"><i class="fa fa-check"></i><b>10.2</b> Time to cardiotoxicity onset from immune checkpoint inhibitor introduction</a></li>
+<li class="chapter" data-level="10.3" data-path="multi_instrument_var.html"><a href="multi_instrument_var.html#death"><i class="fa fa-check"></i><b>10.3</b> Death</a></li>
+<li class="chapter" data-level="10.4" data-path="multi_instrument_var.html"><a href="multi_instrument_var.html#electrocardiograms"><i class="fa fa-check"></i><b>10.4</b> Electrocardiograms</a>
+<ul>
+<li class="chapter" data-level="10.4.1" data-path="multi_instrument_var.html"><a href="multi_instrument_var.html#features"><i class="fa fa-check"></i><b>10.4.1</b> Features</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="biology.html"><a href="biology.html"><i class="fa fa-check"></i><b>11</b> Biology</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="biology.html"><a href="biology.html#abbreviations-4"><i class="fa fa-check"></i><b>11.1</b> Abbreviations</a></li>
+<li class="chapter" data-level="11.2" data-path="biology.html"><a href="biology.html#normal-values-and-ratios"><i class="fa fa-check"></i><b>11.2</b> Normal values and ratios</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="contrib.html"><a href="contrib.html"><i class="fa fa-check"></i><b>12</b> Contributors and contributing centers</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="contrib.html"><a href="contrib.html#contributors"><i class="fa fa-check"></i><b>12.1</b> Contributors</a></li>
+<li class="chapter" data-level="12.2" data-path="contrib.html"><a href="contrib.html#contributing-centers-institutions"><i class="fa fa-check"></i><b>12.2</b> Contributing centers (institutions)</a></li>
+<li class="chapter" data-level="12.3" data-path="contrib.html"><a href="contrib.html#integration-to-redcap"><i class="fa fa-check"></i><b>12.3</b> Integration to Redcap</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">All rights reserved</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Myocarditis Redcap wiki</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="use_case" class="section level1 hasAnchor" number="9">
+<h1><span class="header-section-number">Chapter 9</span> Common use cases<a href="use_case.html#use_case" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="calc_manual_var" class="section level2 hasAnchor" number="9.1">
+<h2><span class="header-section-number">9.1</span> Calculated versus manual vars<a href="use_case.html#calc_manual_var" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Many numeric variables can be entered in two ways:</p>
+<ul>
+<li><p><strong>calculated var:</strong> The user provides dates (e.g., date of birth,
+date of index cardiotoxicity), and the variable is automatically
+calculated from these dates (e.g. age as the difference between
+index cardiotoxicity date and date of birth).</p></li>
+<li><p><strong>manual var:</strong> The user could not provide dates, but had a free
+text field to input the value.</p></li>
+</ul>
+<p>As a result, 2 variables contain the same data. They are not mutually
+exclusive, which means an observation can have a value for the 2
+variables (e.g. the user provided both dates, which allows for automated
+computation in the calculated var, and also entered age in the manual
+var free text variable). There has to be a rule of thumb to choose which
+variable is to be used in the analysis. Here is ours:</p>
+<blockquote>
+<p>Calculated vars are preferred over manual vars</p>
+</blockquote>
+<p>This means that, for a single case:</p>
+<ul>
+<li><p>If the calculated var is available, it will be retained.</p></li>
+<li><p>Else, if the manual var is available, it will be retained.</p></li>
+<li><p>Else, if none are available, the value is missing.</p></li>
+</ul>
+<p>Here is an implementation of this simple logic into an R function</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="use_case.html#cb3-1" aria-hidden="true" tabindex="-1"></a>numvar_uni <span class="ot">&lt;-</span> <span class="co"># Numeric variables unifier</span></span>
+<span id="cb3-2"><a href="use_case.html#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>( <span class="co"># used to organize data entered from 2 variables, currently its a prioritization</span></span>
+<span id="cb3-3"><a href="use_case.html#cb3-3" aria-hidden="true" tabindex="-1"></a>    var1, <span class="co"># a quasi quoted name of column from data. Usually, one is the calculated var, one is the manual var, var1 will be prioritize over var2</span></span>
+<span id="cb3-4"><a href="use_case.html#cb3-4" aria-hidden="true" tabindex="-1"></a>    var2 <span class="co"># also a quasi quoted name</span></span>
+<span id="cb3-5"><a href="use_case.html#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># underlying data.frame data argument is omitted</span></span>
+<span id="cb3-6"><a href="use_case.html#cb3-6" aria-hidden="true" tabindex="-1"></a>  ){</span>
+<span id="cb3-7"><a href="use_case.html#cb3-7" aria-hidden="true" tabindex="-1"></a>    var1 <span class="ot">&lt;-</span> rlang<span class="sc">::</span><span class="fu">enexpr</span>(var1)</span>
+<span id="cb3-8"><a href="use_case.html#cb3-8" aria-hidden="true" tabindex="-1"></a>    var2 <span class="ot">&lt;-</span> rlang<span class="sc">::</span><span class="fu">enexpr</span>(var2)</span>
+<span id="cb3-9"><a href="use_case.html#cb3-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-10"><a href="use_case.html#cb3-10" aria-hidden="true" tabindex="-1"></a>    ex <span class="ot">&lt;-</span> rlang<span class="sc">::</span><span class="fu">expr</span>(dplyr<span class="sc">::</span><span class="fu">case_when</span>(</span>
+<span id="cb3-11"><a href="use_case.html#cb3-11" aria-hidden="true" tabindex="-1"></a>      <span class="sc">!</span><span class="fu">is.na</span>(<span class="sc">!!</span>var1) <span class="sc">~</span> <span class="fu">as.numeric</span>(<span class="sc">!!</span>var1),</span>
+<span id="cb3-12"><a href="use_case.html#cb3-12" aria-hidden="true" tabindex="-1"></a>      <span class="sc">!</span><span class="fu">is.na</span>(<span class="sc">!!</span>var2) <span class="sc">~</span> <span class="fu">as.numeric</span>(<span class="sc">!!</span>var2),</span>
+<span id="cb3-13"><a href="use_case.html#cb3-13" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA_real_</span></span>
+<span id="cb3-14"><a href="use_case.html#cb3-14" aria-hidden="true" tabindex="-1"></a>    ))</span>
+<span id="cb3-15"><a href="use_case.html#cb3-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-16"><a href="use_case.html#cb3-16" aria-hidden="true" tabindex="-1"></a>    ex</span>
+<span id="cb3-17"><a href="use_case.html#cb3-17" aria-hidden="true" tabindex="-1"></a>  }</span></code></pre></div>
+</div>
+<div id="calculated-and-manual-vars-identifiers" class="section level2 hasAnchor" number="9.2">
+<h2><span class="header-section-number">9.2</span> Calculated and manual vars identifiers<a href="use_case.html#calculated-and-manual-vars-identifiers" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<blockquote>
+<p>For a manual var, the associated calculated var has the <strong><code>__c</code></strong>
+suffix.</p>
+</blockquote>
+<p>Example:</p>
+<table>
+<thead>
+<tr class="header">
+<th>manual var</th>
+<th>calculated var</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>p_age</code> (patient age, from instrument admin)</td>
+<td><code>p_age__c</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="freetext_var" class="section level2 hasAnchor" number="9.3">
+<h2><span class="header-section-number">9.3</span> Free text variables<a href="use_case.html#freetext_var" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Users are often provided additional fields in the case their patient
+falls out of the checkboxes. For example, a patient may have experienced
+an auto-immune disease that is not listed in the <code>p_ai_</code> vars.</p>
+<p>In this case, the user can check the <code>p_ai_other</code> box. When this box is
+checked, the <code>p_ai_other__ft</code> variable is displayed. It is a free text
+field where the user can input additional data (e.g. Bullous
+pemphigoid).</p>
+<blockquote>
+<p>Free text vars have the same name as the branching logic displayer,
+with a <code>__ft</code> suffix.</p>
+</blockquote>
+<p>At the moment, data from free text variables is not used to compute
+additional variables for 2 main reasons:</p>
+<ul>
+<li><p>There are few data in these vars</p></li>
+<li><p>Data quality checking requires additional time consuming ressources
+that cannot be applied to a general framework</p></li>
+</ul>
+<blockquote>
+<p>We recommend you use free text variables only if their data closely
+match your research question.</p>
+</blockquote>
+</div>
+<div id="sex" class="section level2 hasAnchor" number="9.4">
+<h2><span class="header-section-number">9.4</span> Sex<a href="use_case.html#sex" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>At this stage, it is a binary variable with value</p>
+<ul>
+<li><p>1 for man</p></li>
+<li><p>2 for woman</p></li>
+</ul>
+<p>It is usually easier to use a variable named “man” or “woman”, built
+from the sex variable, to remember how to interprate model results.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="previous_line.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="multi_instrument_var.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/07-common_transformations.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,158 @@
+# Introducing the database {#intro}
+
+This is a VERY brief introduction. The database was created in 2018, and gather more than 700 cases of immune checkpoint inhibitors associated cardiovascular adverse reactions (as of September 2022). Cases are reported from all around the world, and most of them are myocarditis cases.
+
+> October 2022 update. It was decided to remove all non-myocarditis cases from the base. Some cases were removed after a careful semi-automated review, which also tracked duplicates.
+
+If your not familiar with the Redcap data structure and how data can be exported, you should look at the Redcap Help & FAQ. We will not deal with these concepts here.
+
+```{r world_map, echo=FALSE, message=FALSE, warning=FALSE}
+
+df <- data.frame( # rounded from September 2022 extraction
+  pays = c("France",
+           "United States",
+           "Germany",
+           "Japan",
+           "Israel",
+           "Taiwan",
+           "Canada"
+  ),
+  couleur = c(
+    200, 
+    300,
+    50,
+    30,
+    30,
+    10,
+    5
+  )
+)
+
+
+library(ggplot2)
+library(sf)
+
+library("rnaturalearth")
+library("rnaturalearthdata")
+library(rgeos)
+library(dplyr)
+
+df_world <- ne_countries(scale = "medium", returnclass = "sf")
+
+# df[["pays"]] %in% df_world$name
+
+world <- ne_countries(scale = "medium", returnclass = "sf") %>% 
+  mutate(sovereignt = stringr::str_to_lower(sovereignt)) %>% 
+  left_join(
+    df,
+    by = c("name" = "pays")
+  ) %>% 
+  mutate(
+    couleur = ifelse(is.na(couleur), 1, couleur),
+    including_status = 
+      case_when(
+        name == "France" ~ "Including",
+        name %in% c("United States",
+                    "Chile",
+                    "Australia",
+                    "Italy",
+                    "Germany",
+                    "Canada") ~ "Getting started",
+        TRUE ~ ""
+      )
+  )
+
+g1 <- 
+  ggplot(data = world) +
+  geom_sf(aes(fill = couleur)) +
+  scale_fill_gradient(
+    low="white", high="#3399FF",
+    trans = "log10"
+  ) +
+  guides(fill = 
+           "none") +
+  labs(
+    title = "Contributing countries"
+  ) +
+  theme_void(
+   
+  ) +
+  theme(
+    # panel.background = element_rect(fill = "#b4dcfcff"),
+    panel.grid =  element_blank())
+
+g1
+```
+
+## What is in the Redcap?
+
+In the Redcap you may find an extensive characterization of the cases, including clinical work-up and outcomes. These features are grouped according to time points (baseline, index date, follow-up...) or critical exams (EKG, biopsy...) that are called **instruments** in Redcap. Each instrument is described in a separate chapter in this document.
+
+## Variables naming rules
+
+Variable names are attributed according to standardized rules as follow:
+
+-   A variable name always starts by the instrument identifier (e.g. `p_` for demographic data, see below [Data structure](#data_structure)), with the exception of date `date_`and time `ti_` variables (see [multi-instrument variables](#multi_instrument_var)).
+-   In case an instrument has several important features, the instrument identifier is followed by a feature identifier (e.g. `ic_sy` for index cardiotoxicity symptoms). These important features are detailed in their respective chapter of this book.
+-   [Calculated vars](#calc_manual_var) have a `__c` suffix . If var can either be entered manually or calculated, the names are identical, except for the suffix (e.g. `p_age` and `p_age__c`).
+-   [Free text vars](#freetext_var) have the same name as their branching logic displayer, with an additional suffix `__ft`.
+-   Descriptive vars have the same name as their branching logic displayer, with an additional suffix `__desc`. Note that these vars do not contain any data and are not usually exported.
+-   All variables names are lower case, with words separated by underscores (e.g. you will not see upper case vars such as `AGE_VAR`). This is also known as `snake_case` format.
+-   As much as possible, we use singular rather than plural in the names (e.g. `antimetabolite` rather than `antimetabolites`)
+-   Variables with the `__old` suffix are former versions that will be integrated in v3 of the database. They contain the same type of information, but often have different levels (e.g. an additional "missing" level).
+
+We translate here a general description of the variables. To get a precise definition of a variable, you will be more inspired looking at the Redcap's codebook.
+
+**Please note** this document is NOT an exhaustive list of the variables in the redcap and is not intended to be.
+
+## Data structure {#data_structure}
+
+The Redcap instruments are:
+
++-----------------------------------+------------+-------------------------------------------------------------------------------------------------------------------------------+
+| Instrument                        | Identifier | Description                                                                                                                   |
++===================================+============+===============================================================================================================================+
+| [Admin](#admin)                   | [ad]       | Identify the reporting source, the reporter, with mailing contact information.                                                |
++-----------------------------------+------------+-------------------------------------------------------------------------------------------------------------------------------+
+| [Demographics](#demo)             | [p]        | Patient demographics (age, sex...), medical history (including cardiovascular history), and medications.                      |
++-----------------------------------+------------+-------------------------------------------------------------------------------------------------------------------------------+
+| [Baseline EKG](#ekg)              | [be]       | If any, description of a baseline Electrocardiogram (prior to cardiotoxicity).                                                |
++-----------------------------------+------------+-------------------------------------------------------------------------------------------------------------------------------+
+| [Previous line](#previous_line)   | [pl]       | Features of prior anticancer treatments, including those of older cancers and the current cancer in prior lines of treatment. |
++-----------------------------------+------------+-------------------------------------------------------------------------------------------------------------------------------+
+| [Current line](#current_line)     | [cl]       | Features of the current line of anticancer treatment containing immunotherapy(ies).                                           |
+|                                   |            |                                                                                                                               |
+|                                   |            | Also, features of the current cancer (actively treated).                                                                      |
++-----------------------------------+------------+-------------------------------------------------------------------------------------------------------------------------------+
+| [Index cardiotoxicity](#index_c)  | [ic]       | All clinical work-up of the patient when presenting for cardiotoxicity. This is the main instrument.                          |
++-----------------------------------+------------+-------------------------------------------------------------------------------------------------------------------------------+
+| [Index EKG](#ekg)                 | [ie]       | Electrocardiogram at the time of index cardiotoxicity.                                                                        |
++-----------------------------------+------------+-------------------------------------------------------------------------------------------------------------------------------+
+| [Index hospitalization](#index_h) | [ih]       | Features that occurred during the hospitalization that followed cardiotoxicity diagnosis. Includes additional EKGs.           |
++-----------------------------------+------------+-------------------------------------------------------------------------------------------------------------------------------+
+| [Follow-up](#fup)                 | [fu]       | Long term outcomes.                                                                                                           |
++-----------------------------------+------------+-------------------------------------------------------------------------------------------------------------------------------+
+| [Biology](#biology)               | [b         | All biological features (transversal instrument)                                                                              |
++-----------------------------------+------------+-------------------------------------------------------------------------------------------------------------------------------+
+
+## Multi-instrument variables
+
+Sometime, an event can occur at different times. For example, a patient can experience death during its index hospitalization, or later in follow-up. To ensure a proper identification of events according to the research purpose, [a separate chapter is dedicated to theses variables](#multi_instrument_var) including timings.
+
+## Root variables
+
+When a question can have multiple non-exclusive answers, the Field Type in Redcap is "checklist".
+
+For example: which alkylating agent(s) was(were) used?
+
+-   Cisplatin
+
+-   Carboplatin
+
+Suppose the dots are checkboxes and you may select either of them.
+
+In this case, Redcap creates subvariables in the data extraction. If the variable name is `p_pl_alkylating_agent`, then you will NOT find it in the extraction. You will have 2 subvariables named `p_pl_alkylating_agent___1` and `p_pl_alkylating_agent___2`.
+
+> Root variables are those variables that are splitted into multiple subvariables, i.e. which have the Field Type argument "checkbox".
+
+You may want to merge back these variables together, to create a global variable: "Has the patient been treated with any alkylating agent?".

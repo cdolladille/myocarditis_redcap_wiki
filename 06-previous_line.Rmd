@@ -1,0 +1,39 @@
+# Previous line {#previous_line}
+
+> Previous line identifier is [pl]
+
+## Definition
+
+Instrument previous line refers to any anticancer treatment received, either for a prior cancer **or for the current cancer**, before the current line.
+
+The [current line](#current_line) is the most recently administered one that contains immune checkpoint inhibitors. It can be ongoing at the time of index cardiotoxicity, or may have been interrupted.
+
+## Abbreviations {#previous_line_ab_table}
+
+Here is a list of abbreviations used in several variables in the demo instrument.
+
++-----------------+------------------------------------------------------------------------------------------------------------------------------------------------+
+| Abbreviation(s) | Feature                                                                                                                                        |
++=================+================================================================================================================================================+
+| `atez`          | Standardized **4-character** abbreviations of immune checkpoint inhibitors                                                                     |
+|                 |                                                                                                                                                |
+| `avel`          | Atezolizumab, avelumab, cemiplimab, durvalumab, nivolumab, ipilimumab, pembrolizumab, tremelimumab                                             |
+|                 |                                                                                                                                                |
+| `cemi`          |                                                                                                                                                |
+|                 |                                                                                                                                                |
+| `durv`          |                                                                                                                                                |
+|                 |                                                                                                                                                |
+| `nivo`          |                                                                                                                                                |
+|                 |                                                                                                                                                |
+| `ipil`          |                                                                                                                                                |
+|                 |                                                                                                                                                |
+| `pemb`          |                                                                                                                                                |
+|                 |                                                                                                                                                |
+| `trem`          |                                                                                                                                                |
++-----------------+------------------------------------------------------------------------------------------------------------------------------------------------+
+| `pd1`           | When drug name is not know, standardized abbreviations related to ICI class.                                                                   |
+|                 |                                                                                                                                                |
+| `pdl1`          | Anti-PD1, anti-PD-L1, anti-CTLA4                                                                                                               |
+|                 |                                                                                                                                                |
+| `ctla4`         | Also `pd1_other`, `pdl1_other`, and `ctla4_other` to refer to an ICI from a class that is not in the aforementioned list (e.g. a new anti-PD1) |
++-----------------+------------------------------------------------------------------------------------------------------------------------------------------------+
