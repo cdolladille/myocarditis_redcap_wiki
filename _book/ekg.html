@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Page not found | Myocarditis Redcap wiki</title>
+  <title>Chapter 7 Electrocardiograms | Myocarditis Redcap wiki</title>
   <meta name="description" content="This is a reference book that describes the data structure and variables and the common data management schemes used for the analysis of the Myocarditis Redcap from Vanderbilt University." />
   <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Page not found | Myocarditis Redcap wiki" />
+  <meta property="og:title" content="Chapter 7 Electrocardiograms | Myocarditis Redcap wiki" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This is a reference book that describes the data structure and variables and the common data management schemes used for the analysis of the Myocarditis Redcap from Vanderbilt University." />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Page not found | Myocarditis Redcap wiki" />
+  <meta name="twitter:title" content="Chapter 7 Electrocardiograms | Myocarditis Redcap wiki" />
   
   <meta name="twitter:description" content="This is a reference book that describes the data structure and variables and the common data management schemes used for the analysis of the Myocarditis Redcap from Vanderbilt University." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-
+<link rel="prev" href="index_c.html"/>
+<link rel="next" href="index_h.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -235,19 +235,285 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="page-not-found" class="section level1">
-<h1>Page not found</h1>
-<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
-<p>You may want to try searching to find the page's new location, or use
-the table of contents to find the page you are looking for.</p>
+<div id="ekg" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">Chapter 7</span> Electrocardiograms<a href="ekg.html#ekg" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><strong>There are two identifiers for baseline and index electrocardiograms</strong></p>
+<blockquote>
+<p>Baseline electrocardiogram identifiers are [be] and [be2]</p>
+<p>Index electrocardiogram identifiers are [ie] and [ie2]</p>
+</blockquote>
+<p>Although there are 2 identifiers for each, they refer to the same EKG (e.g. <code>ie</code> and <code>ie2</code> are the same EKG).</p>
+<p>The duplicates were created to have a standard interpretation of EKGs in addition to the interpretation provided by the reporter.</p>
+<p>Benay Ozbay reviewed all uploaded EKG files up to November 2022, and reported data into <code>be2</code> and <code>ie2</code>. This means that <code>be2</code> and <code>ie2</code> features should be preferred over <code>be</code> and <code>ie</code> ones, when both are available.</p>
+<p>Subsequent EKG during follow-up are in the index hospitalization instrument <code>ih_ekg</code> or in the follow-up instrument <code>fu_ekg</code>. (no expert review)</p>
+<div id="analysis" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> Analysis<a href="ekg.html#analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>All these four EKGs (be, ie, ih, fu) have an <code>analysis</code> feature. Below is the correspondence of each checkbox number.</p>
+<p>Analysis feature exists for both be/be2 and ie/ie2.</p>
+<table>
+<colgroup>
+<col width="7%" />
+<col width="92%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>analysis_num</th>
+<th>Feature</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Normal Sinus Rhythm</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Accelerated Idioventricular Rhythm</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Accelerated Junctional Rhythm</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Asystole</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Atrial Fibrillation</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>Atrial Flutter</td>
+</tr>
+<tr class="odd">
+<td>30</td>
+<td>AV Nodal Reentrant Tachycardia</td>
+</tr>
+<tr class="even">
+<td>7</td>
+<td>Bundle Branch Block, Nonspecific</td>
+</tr>
+<tr class="odd">
+<td>46</td>
+<td>Bundle Branch Block, Left Bundle (defined as QRS ≥120ms + broad notched or slurred R wave in I, aVL, V5 &amp; V6)</td>
+</tr>
+<tr class="even">
+<td>48</td>
+<td>Bundle Branch Block, Right Bundle (defined as QRS ≥120ms; RSR’ pattern in V1-V3; and slurred S wave in I, aVL, V5-6)</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>Escape Rhythm, Ventricular</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>Escape Rhythm, Junctional</td>
+</tr>
+<tr class="odd">
+<td>47</td>
+<td>Fasicular Block, Left Anterior</td>
+</tr>
+<tr class="even">
+<td>49</td>
+<td>Fasicular Block, Left Posterior</td>
+</tr>
+<tr class="odd">
+<td>8</td>
+<td>Heart Block, First Degree</td>
+</tr>
+<tr class="even">
+<td>24</td>
+<td>Heart Block, Second Degree Type II</td>
+</tr>
+<tr class="odd">
+<td>31</td>
+<td>Heart Block, Third Degree</td>
+</tr>
+<tr class="even">
+<td>11</td>
+<td>Junctional Tachycardia</td>
+</tr>
+<tr class="odd">
+<td>52</td>
+<td>Left Ventricular Hypertrophy (defined as sum of S wave in V1 + R wave in V5 or V6 ≥35 mm or R wave in aVL ≥11 mm)</td>
+</tr>
+<tr class="even">
+<td>53</td>
+<td>Low QRS Voltage (defined as QRS voltage &lt; 5 mm in the limb leads and/or &lt; 10mm in precordial leads.)</td>
+</tr>
+<tr class="odd">
+<td>12</td>
+<td>Multifocal Atrial Tachycardia</td>
+</tr>
+<tr class="even">
+<td>54</td>
+<td>PR-segment Depression (defined as ≥0.5 mm PR depression from TP segment)</td>
+</tr>
+<tr class="odd">
+<td>56</td>
+<td>P wave abnormality suggesting left atrial enlargement</td>
+</tr>
+<tr class="even">
+<td>57</td>
+<td>P wave abnormality suggesting right atrial enlargement</td>
+</tr>
+<tr class="odd">
+<td>17</td>
+<td>Premature Atrial Complex</td>
+</tr>
+<tr class="even">
+<td>20</td>
+<td>Premature Ventricular Complex Bigeminy</td>
+</tr>
+<tr class="odd">
+<td>21</td>
+<td>Premature Ventricular Complex Quadrigeminy</td>
+</tr>
+<tr class="even">
+<td>22</td>
+<td>Premature Ventricular Complex Trigeminy</td>
+</tr>
+<tr class="odd">
+<td>39</td>
+<td>Pulseless Electrical Activity</td>
+</tr>
+<tr class="even">
+<td>51</td>
+<td>Q Waves, Pathological</td>
+</tr>
+<tr class="odd">
+<td>26</td>
+<td>Sinus Arrest / Sinus Pause</td>
+</tr>
+<tr class="even">
+<td>27</td>
+<td>Sinus Arrhythmia</td>
+</tr>
+<tr class="odd">
+<td>28</td>
+<td>Sinus Bradycardia</td>
+</tr>
+<tr class="even">
+<td>58</td>
+<td>Sinus Dysfunction</td>
+</tr>
+<tr class="odd">
+<td>29</td>
+<td>Sinus Tachycardia</td>
+</tr>
+<tr class="even">
+<td>40</td>
+<td>ST segment elevation, diffuse (defined as ≥1 mm unless in leads V2 to V3 where defined as ≥2 mm in men ≥40 years, ≥2.5 mm in men &lt; 40 years, and ≥1.5 mm in women)</td>
+</tr>
+<tr class="odd">
+<td>41</td>
+<td>ST segment elevation, regional (defined as ≥1 mm unless in leads V2 to V3 where defined as ≥2 mm in men ≥40 years, ≥2.5 mm in men &lt; 40 years, and ≥1.5 mm in women)</td>
+</tr>
+<tr class="even">
+<td>42</td>
+<td>ST segment depression, diffuse (defined as ≥0.5 mm below the baseline)</td>
+</tr>
+<tr class="odd">
+<td>45</td>
+<td>Tall T waves (defined as &gt;10 mm in precordial leads or &gt;5 mm in the limb leads)</td>
+</tr>
+<tr class="even">
+<td>44</td>
+<td>T wave inversions</td>
+</tr>
+<tr class="odd">
+<td>55</td>
+<td>T wave notching in ≥ 3 leads (defined as bifid T-wave with a notch duration between the 2 peaks ≥40 ms and an amplitude ≥0.5 mm)</td>
+</tr>
+<tr class="even">
+<td>32</td>
+<td>Ventricular Fibrillation</td>
+</tr>
+<tr class="odd">
+<td>50</td>
+<td>Ventricular Tachycardia, Non-sustained (defined as 3 or more premature ventricular contractions for &lt; 30 seconds at a rate of &gt;100 beats per minute without hemodynamic collapse)</td>
+</tr>
+<tr class="even">
+<td>33</td>
+<td>Ventricular Tachycardia Unspecified Morphology, Sustained</td>
+</tr>
+<tr class="odd">
+<td>34</td>
+<td>Ventricular Tachycardia Monomorphic, Sustained</td>
+</tr>
+<tr class="even">
+<td>35</td>
+<td>Ventricular Tachycardia Polymorphic, Sustained</td>
+</tr>
+<tr class="odd">
+<td>36</td>
+<td>Ventricular Tachycardia Torsade de Pointes, Sustained</td>
+</tr>
+<tr class="even">
+<td>37</td>
+<td>Wandering Atrial Pacemaker</td>
+</tr>
+<tr class="odd">
+<td>38</td>
+<td>Wolff-Parkinson-White Syndrome</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="heart-rate" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> Heart rate<a href="ekg.html#heart-rate" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Can be found for <code>be</code>, <code>be2</code>, <code>ie</code>, and <code>ie2</code>.</p>
+<p>Feature id is <code>heart_rate</code>.</p>
+</div>
+<div id="durations-voltages" class="section level2 hasAnchor" number="7.3">
+<h2><span class="header-section-number">7.3</span> Durations, voltages<a href="ekg.html#durations-voltages" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Additional data on mainstream durations and voltages can be found for <code>be</code>, <code>be2</code> and <code>ie2</code> (not for <code>ie</code>, don’t ask me why).</p>
+<table>
+<colgroup>
+<col width="23%" />
+<col width="76%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>var</th>
+<th>EKG measure</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>pr_duration</td>
+<td>PR</td>
+</tr>
+<tr class="even">
+<td>qrs_duration</td>
+<td>QRS</td>
+</tr>
+<tr class="odd">
+<td>qt_duration</td>
+<td><p>QT</p>
+<p>Also qtcb_duration__c and qtcf_duration__c that are both calculated</p></td>
+</tr>
+<tr class="even">
+<td>sokolow_lyon_voltage</td>
+<td>QRS voltage (only <code>be2</code>, <code>ie2</code>)</td>
+</tr>
+<tr class="odd">
+<td>cornell_voltage</td>
+<td>QRS voltage (only <code>be2</code>, <code>ie2</code>)</td>
+</tr>
+</tbody>
+</table>
+
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-
+<a href="index_c.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="index_h.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -278,7 +544,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/USERNAME/REPO/edit/BRANCH/%s",
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/06-ekg.Rmd",
 "text": "Edit"
 },
 "history": {

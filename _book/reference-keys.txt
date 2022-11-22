@@ -26,6 +26,10 @@ abbreviations-1
 index_c
 abbreviations-2
 biological-features
+ekg
+analysis
+heart-rate
+durations-voltages
 index_h
 abbreviations-3
 previous_line
@@ -49,3 +53,4 @@ contrib
 contributors
 contributing-centers-institutions
 integration-to-redcap
+bnpv-and-donotcontactperdrmoslehi.com
