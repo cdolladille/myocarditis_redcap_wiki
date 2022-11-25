@@ -71,3 +71,7 @@ Most normal values of biological parameters are different from one lab to anothe
 Examples: troponin upper limit of normal may range from \~ 0.01 to \~ 50. Complete blood count can be reported in G/L or 10\^-3/µL (even if the var field asked for reporting with one of them).
 
 It is advised to express biological parameters according to their normal value range if known, or to contrast them into ratios that get rid of the unit (example: neutrophil to lymphocyte ratio)
+
+## Diagnosis staging according to Bonaca's
+
+Bonaca's criteria were summarised in `ic_ctx1_certainty_adjudication`.
