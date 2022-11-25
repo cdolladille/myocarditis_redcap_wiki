@@ -24,31 +24,15 @@ For example, time between index cardiotoxicity and death is `ti_ic_death`. An ev
 
 Of note, times can be expressed in days, weeks or years.
 
-+------------------------+---------------+-----------+---------------------------------------------------------+
-| var                    | instrument    | unit      | quick desc                                              |
-+========================+===============+===========+=========================================================+
-| `ti_tobaccoquit_ic`    | demo          | years     | From tobacco quitting to IC                             |
-+------------------------+---------------+-----------+---------------------------------------------------------+
-| `ti_otx_ic`            | demo          | years     | From organ transplant x to IC                           |
-+------------------------+---------------+-----------+---------------------------------------------------------+
-| `ti_plicistop_ic`      | demo          | days      | From previous line ICI stop (end of regimen) to IC      |
-+------------------------+---------------+-----------+---------------------------------------------------------+
-| `pl_drug_regimen_freq` | previous_line | weeks     | From one cure to another, during an ICI therapy regimen |
-+------------------------+---------------+-----------+---------------------------------------------------------+
-| `ti_ic_1ststeroid`     | ic            | days      | From IC to first dose of steroids                       |
-+------------------------+---------------+-----------+---------------------------------------------------------+
-| `ti_cl1stnivo_ic`      | cl            | days      | From current line ICI-drug 1st infusion to IC           |
-+------------------------+---------------+-----------+---------------------------------------------------------+
-| `ti_ic_ihdischarge`    | ih            | days      | Length of hospital stay                                 |
-+------------------------+---------------+-----------+---------------------------------------------------------+
-|                        |               |           |                                                         |
-+------------------------+---------------+-----------+---------------------------------------------------------+
-|                        |               |           |                                                         |
-+------------------------+---------------+-----------+---------------------------------------------------------+
-|                        |               |           |                                                         |
-+------------------------+---------------+-----------+---------------------------------------------------------+
-|                        |               |           |                                                         |
-+------------------------+---------------+-----------+---------------------------------------------------------+
+| var                    | instrument    | unit  | quick desc                                              |
+|-------------|-------------|-------------|-------------------------------|
+| `ti_tobaccoquit_ic`    | demo          | years | From tobacco quitting to IC                             |
+| `ti_otx_ic`            | demo          | years | From organ transplant x to IC                           |
+| `ti_plicistop_ic`      | demo          | days  | From previous line ICI stop (end of regimen) to IC      |
+| `pl_drug_regimen_freq` | previous_line | weeks | From one cure to another, during an ICI therapy regimen |
+| `ti_ic_1ststeroid`     | ic            | days  | From IC to first dose of steroids                       |
+| `ti_cl1stnivo_ic`      | cl            | days  | From current line ICI-drug 1st infusion to IC           |
+| `ti_ic_ihdischarge`    | ih            | days  | Length of hospital stay                                 |
 
 ## Time to cardiotoxicity onset from immune checkpoint inhibitor introduction
 
@@ -93,108 +77,89 @@ ggplot(data = data1, aes(x = v1)) +
 
 This data is stored at the immune checkpoint inhibitor level, e.g., a patient who received nivolumab will have this data stored in a nivolumab specific variable. The structure for this data is
 
-+------------------------+-----------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Current                | Target                      | Description                                                                                                                                              |
-+========================+=============================+==========================================================================================================================================================+
-| `start_days_drug`      | `ti_icistart_ic_drug`       | It is a **delay**, in days. Drug name is abbreviated here in the current naming (e.g. nivo for nivolumab). Sometimes, the drug name is wrong (see below) |
-|                        |                             |                                                                                                                                                          |
-|                        |                             | Could be : time variable (ti\_) from (ici_start) to index cardiotoxicity (ic), for drug (drug complete name)                                             |
-+------------------------+-----------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+
-| `start_days_drugx`     | `ti_icistart_ic_drug__calc` | Same but computed from dates (when available). Mind the "x" at the end of the name                                                                       |
-|                        |                             |                                                                                                                                                          |
-|                        |                             | Could be: same but with a standardized suffix indicating a calculation                                                                                   |
-+------------------------+-----------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+
-| `first_doses_drug_mce` |                             | Drug name is complete here. It is an old variable which has now the \\\@ HIDDEN status, and is similar to start_days_drugx                               |
-+------------------------+-----------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Var name               | Description                                                                                        |
+|---------------------|---------------------------------------------------|
+| `ti_cl1stdrug_ic`      | It is a **delay**, in days. Drug name is abbreviated to a 4 digit name                             |
+| `ti_cl1stdrug_ic__c`   | Same but computed from dates (when available).                                                     |
+| `ti_cl1stdrug_ic__old` | It is an old variable which has now the \\\@ HIDDEN status, and is similar to `ti_cl1stdrug_ic__c` |
 
 To capture this time to onset, you have to check every possibilities for a patient, e.g. you must check for all immune checkpoint inhibitor level time variables and choose which of these 3 variables you keep first, if ever more than one is available. This gives a quite heavy piece of code
 
-```{r}
-ti_icistart_ic = expr(pmax( # pmax here: maximum delay (in the case multiple ICI were prescribed sequentially)
-   eval(tto_uni_3v(start_days_nivo,
-                 start_days_nivox,
-                 first_doses_nivolumab_mce)), # identical to start_days_nivox but it is @HIDDEN
-   eval(tto_uni_3v(start_days_pem,
-                 start_days_pemx,
-                 first_doses_pembrolizumab_mce)), # @HIDDEN
-   eval(tto_uni_3v(start_days_pem_2, # Other Anti-PD1 regimen
-                 start_days_pem_2x,
-                 first_doses_pembrolizumab_mce_2)),# @HIDDEN
-   eval(tto_uni_3v(start_days_pem_3, # Cemiplimab 
-                 start_days_pem_3x,
-                 first_doses_pembrolizumab_mce_3)),
-   eval(tto_uni_3v(start_days_atez,
-                 start_days_atezx,
-                 first_doses_atezolizumab_mce)),
-   eval(tto_uni_3v(start_days_ave,
-                 start_days_avex,
-                 first_doses_avelumab_mce)),
-   eval(tto_uni_3v(start_days_durv,
-                 start_days_durvx,
-                 first_doses_durvalumab_mce)),
-   eval(tto_uni_3v(start_days_durv_3,# Ohter Anti-PDL1
-                 start_days_durv_3x,
-                 first_doses_durvalumab_mce_3)),
-   eval(tto_uni_3v(start_days_ipi,
-                 start_days_ipix,
-                 first_doses_ipilimumab_mce)),
-   eval(tto_uni_3v(start_days_trem,
-                 start_days_tremx,
-                 first_doses_tremelimumab_mce)),
-   eval(tto_uni_3v(start_days_trem_2, # Other Anti-CTLA4
-                 start_days_trem_2x,
-                 first_doses_tremelimumab_mce_2)),
-    na.rm = TRUE
-  ) - # look at the minus!! Shall we keep it? 2022-09-16
-    eval(numvar_uni(cardiotox_days_1,
-                    cardiotox_days_1x))
-    # Number of days before presentation that Myocarditis symptoms began
-     
+```{r, eval=FALSE}
+ti_cl1stici_ic = expr(pmax( # pmax here: maximum delay (in the case multiple ICI were prescribed sequentially)
+
+    eval(tto_uni_3v(ti_cl1statez_ic__c, ti_cl1statez_ic, ti_cl1statez_ic__old)), 
+    eval(tto_uni_3v(ti_cl1stavel_ic__c, ti_cl1stavel_ic, ti_cl1stavel_ic__old)), 
+    eval(tto_uni_3v(ti_cl1stcemi_ic__c, ti_cl1stcemi_ic, ti_cl1stcemi_ic__old)), 
+    eval(tto_uni_3v(ti_cl1stdurv_ic__c, ti_cl1stdurv_ic, ti_cl1stdurv_ic__old)), 
+    eval(tto_uni_3v(ti_cl1stipil_ic__c, ti_cl1stipil_ic, ti_cl1stipil_ic__old)), 
+    eval(tto_uni_3v(ti_cl1stnivo_ic__c, ti_cl1stnivo_ic, ti_cl1stnivo_ic__old)), 
+    eval(tto_uni_3v(ti_cl1stpemb_ic__c, ti_cl1stpemb_ic, ti_cl1stpemb_ic__old)), 
+    eval(tto_uni_3v(ti_cl1sttrem_ic__c, ti_cl1sttrem_ic, ti_cl1sttrem_ic__old)), 
+    eval(tto_uni_3v(ti_cl1stpd1_other_ic__c, ti_cl1stpd1_other_ic, 
+        ti_cl1stpd1_other_ic__old)), 
+    eval(tto_uni_3v(ti_cl1stpdl1_other_ic__c, 
+        ti_cl1stpdl1_other_ic, ti_cl1stpdl1_other_ic__old)), 
+    eval(tto_uni_3v(ti_cl1stctla4_other_ic__c, ti_cl1stctla4_other_ic, 
+        ti_cl1stctla4_other_ic__old)), 
+    na.rm = TRUE)
   )
 ```
 
-Where `eval(tto_univ_3v())` would be a prioritizer function among the 3 variables. Note that we might want to substract the `cardiotox_days_1` delay, if we're interested in the beginning of symptoms rather than index date of referral.
+Where `eval(tto_univ_3v())` would be a prioritizer function among the 3 variables. Note that we might want to substract the `ti_icsy_ic` delay, if we're interested in the beginning of symptoms rather than index cardiotoxicity date.
+
+```{r}
+tto_uni_3v <- # A 3 variables time to onset unifier !
+  function( # used to organize the three variables of time to cardiotox onset from drug initiation
+    ti_icistart_event__c, # all quasi quoted names of columns from data. One is the calculated delay `ti_icistart_event__c`, one is manually entered when dates are not available `ti_icistart_event`, one is a old version of the variable `ti_icistart_event__old`
+    ti_icistart_event,
+    ti_icistart_event__old
+  ){
+    ti_icistart_event__c <- enexpr(ti_icistart_event__c)
+    ti_icistart_event <- enexpr(ti_icistart_event)
+    ti_icistart_event__old <- enexpr(ti_icistart_event__old)
+    
+    # underlying logic: 
+    # first, prioritize calculated over manual vars with numvar_uni (intermediate object uni).
+    # second, take the longest delay of uni and __old, if both are available.
+    # third, if only one available, keep it (via na.rm = TRUE in pmax)
+    
+    # generate an expression to call numvar_uni
+    
+    uni <- numvar_uni(!!ti_icistart_event__c,
+                      !!ti_icistart_event)
+    
+    ex <- quo(pmax(
+      eval(uni),
+      as.numeric(!!ti_icistart_event__old),
+      na.rm = TRUE)
+    )
+    
+    
+    ex
+  }
+
+numvar_uni <- # Numeric variables unifier
+  function( # used to organize data entered from 2 variables, currently its a prioritization
+    var1, # all quasi quoted names of columns from data. usually, one is the calculated var, one is manually entered, var1 will be prioritize over var2
+    var2
+    # underlying data.frame data argument is omitted
+  ){
+    var1 <- enexpr(var1)
+    var2 <- enexpr(var2)
+    
+    ex <- expr(case_when(
+      !is.na(!!var1) ~ as.numeric(!!var1),
+      !is.na(!!var2) ~ as.numeric(!!var2),
+      TRUE ~ NA_real_
+    ))
+    
+    ex
+  }
+```
 
 ## Death
 
 -   `ih_ou_death` : During index hospitalization
 
 -   `fu_death` : During follow-up (later than discharge)
-
-## Electrocardiograms
-
--   `be` : Baseline (before immune checkpoint inhibitor current cycle 1st infusion)
-
--   `be2` : The same +++ it is a duplicate in a separate instrument (should be merged in the future). There are more features here.
-
--   `ie` : Index cardiotoxicity (1st EKG at the time of cardiotoxicity diagnosis)
-
--   `ie2` : The same ++ it is a duplicate in a separate instrument (should be merged in the future). There are more features here.
-
--   `ih_ekg` : Additional EKG(s) during index hospitalization
-
--   `fu_ekg` : Most recent EKG during follow-up
-
-### Features
-
-+---------------------------------+----------------------------------------------------------+
-| Variable                        | Definition                                               |
-+=================================+==========================================================+
-| `exist`                         | Availability of said EKG                                 |
-+---------------------------------+----------------------------------------------------------+
-| `analysis`                      | All EKG diagnoses (rhythm, durations, repolarization...) |
-+---------------------------------+----------------------------------------------------------+
-| `cornell_voltage`               | Numeric features (only available for `be2` and `ie2`)    |
-|                                 |                                                          |
-| `sokolow_lyon_voltage`          |                                                          |
-|                                 |                                                          |
-| `heart_rate`                    |                                                          |
-|                                 |                                                          |
-| `pr_duration`                   |                                                          |
-|                                 |                                                          |
-| `qrs_duration`                  |                                                          |
-|                                 |                                                          |
-| `qt_duration (also qtcb, qtcf)` |                                                          |
-+---------------------------------+----------------------------------------------------------+
-
-Also, timings according to index cardiotoxicity, and upload variables.

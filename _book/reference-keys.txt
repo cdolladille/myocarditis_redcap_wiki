@@ -1,8 +1,8 @@
-tab:unnamed-chunk-7
-tab:unnamed-chunk-8
 tab:unnamed-chunk-9
 tab:unnamed-chunk-10
 tab:unnamed-chunk-11
+tab:unnamed-chunk-12
+tab:unnamed-chunk-13
 about
 usage
 target-users
@@ -26,6 +26,7 @@ abbreviations-1
 index_c
 abbreviations-2
 biological-features
+diagnosis-staging-according-to-bonacas
 ekg
 analysis
 heart-rate
@@ -44,8 +45,6 @@ multi_instrument_var
 date-and-time-variables
 time-to-cardiotoxicity-onset-from-immune-checkpoint-inhibitor-introduction
 death
-electrocardiograms
-features
 biology
 abbreviations-4
 normal-values-and-ratios

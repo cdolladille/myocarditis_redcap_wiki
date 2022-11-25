@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 11 Multi-instrument variables | Myocarditis Redcap wiki</title>
   <meta name="description" content="This is a reference book that describes the data structure and variables and the common data management schemes used for the analysis of the Myocarditis Redcap from Vanderbilt University." />
-  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 11 Multi-instrument variables | Myocarditis Redcap wiki" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Charles Dolladille" />
 
 
-<meta name="date" content="2022-11-22" />
+<meta name="date" content="2022-11-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -170,6 +170,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="6.1" data-path="index_c.html"><a href="index_c.html#abbreviations-2"><i class="fa fa-check"></i><b>6.1</b> Abbreviations</a></li>
 <li class="chapter" data-level="6.2" data-path="index_c.html"><a href="index_c.html#biological-features"><i class="fa fa-check"></i><b>6.2</b> Biological features</a></li>
+<li class="chapter" data-level="6.3" data-path="index_c.html"><a href="index_c.html#diagnosis-staging-according-to-bonacas"><i class="fa fa-check"></i><b>6.3</b> Diagnosis staging according to Bonaca’s</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="ekg.html"><a href="ekg.html"><i class="fa fa-check"></i><b>7</b> Electrocardiograms</a>
 <ul>
@@ -198,10 +199,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.1" data-path="multi_instrument_var.html"><a href="multi_instrument_var.html#date-and-time-variables"><i class="fa fa-check"></i><b>11.1</b> Date and time variables</a></li>
 <li class="chapter" data-level="11.2" data-path="multi_instrument_var.html"><a href="multi_instrument_var.html#time-to-cardiotoxicity-onset-from-immune-checkpoint-inhibitor-introduction"><i class="fa fa-check"></i><b>11.2</b> Time to cardiotoxicity onset from immune checkpoint inhibitor introduction</a></li>
 <li class="chapter" data-level="11.3" data-path="multi_instrument_var.html"><a href="multi_instrument_var.html#death"><i class="fa fa-check"></i><b>11.3</b> Death</a></li>
-<li class="chapter" data-level="11.4" data-path="multi_instrument_var.html"><a href="multi_instrument_var.html#electrocardiograms"><i class="fa fa-check"></i><b>11.4</b> Electrocardiograms</a>
-<ul>
-<li class="chapter" data-level="11.4.1" data-path="multi_instrument_var.html"><a href="multi_instrument_var.html#features"><i class="fa fa-check"></i><b>11.4.1</b> Features</a></li>
-</ul></li>
 </ul></li>
 <li class="chapter" data-level="12" data-path="biology.html"><a href="biology.html"><i class="fa fa-check"></i><b>12</b> Biology</a>
 <ul>
@@ -256,12 +253,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Time variables represent <strong>delays</strong> between two dates.</p>
 </blockquote>
 <p>Of note, times can be expressed in days, weeks or years.</p>
-<table style="width:98%;">
+<table>
 <colgroup>
-<col width="22%" />
-<col width="14%" />
-<col width="10%" />
-<col width="51%" />
+<col width="18%" />
+<col width="18%" />
+<col width="18%" />
+<col width="44%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -314,114 +311,107 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td>days</td>
 <td>Length of hospital stay</td>
 </tr>
-<tr class="even">
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
 </tbody>
 </table>
 </div>
 <div id="time-to-cardiotoxicity-onset-from-immune-checkpoint-inhibitor-introduction" class="section level2 hasAnchor" number="11.2">
 <h2><span class="header-section-number">11.2</span> Time to cardiotoxicity onset from immune checkpoint inhibitor introduction<a href="multi_instrument_var.html#time-to-cardiotoxicity-onset-from-immune-checkpoint-inhibitor-introduction" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>As the title suggests, the idea is to collect the time to onset between the <strong>first dose</strong> of immune checkpoint inhibitor received <strong>during the current cycle</strong> and the occurrence of cardiotoxicity.</p>
-<p><img src="_main_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>This data is stored at the immune checkpoint inhibitor level, e.g., a patient who received nivolumab will have this data stored in a nivolumab specific variable. The structure for this data is</p>
-<table style="width:100%;">
+<table>
 <colgroup>
-<col width="11%" />
-<col width="14%" />
-<col width="73%" />
+<col width="29%" />
+<col width="70%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th>Current</th>
-<th>Target</th>
+<th>Var name</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><code>start_days_drug</code></td>
-<td><code>ti_icistart_ic_drug</code></td>
-<td><p>It is a <strong>delay</strong>, in days. Drug name is abbreviated here in the current naming (e.g. nivo for nivolumab). Sometimes, the drug name is wrong (see below)</p>
-<p>Could be : time variable (ti_) from (ici_start) to index cardiotoxicity (ic), for drug (drug complete name)</p></td>
+<td><code>ti_cl1stdrug_ic</code></td>
+<td>It is a <strong>delay</strong>, in days. Drug name is abbreviated to a 4 digit name</td>
 </tr>
 <tr class="even">
-<td><code>start_days_drugx</code></td>
-<td><code>ti_icistart_ic_drug__calc</code></td>
-<td><p>Same but computed from dates (when available). Mind the “x” at the end of the name</p>
-<p>Could be: same but with a standardized suffix indicating a calculation</p></td>
+<td><code>ti_cl1stdrug_ic__c</code></td>
+<td>Same but computed from dates (when available).</td>
 </tr>
 <tr class="odd">
-<td><code>first_doses_drug_mce</code></td>
-<td></td>
-<td>Drug name is complete here. It is an old variable which has now the \@ HIDDEN status, and is similar to start_days_drugx</td>
+<td><code>ti_cl1stdrug_ic__old</code></td>
+<td>It is an old variable which has now the \@ HIDDEN status, and is similar to <code>ti_cl1stdrug_ic__c</code></td>
 </tr>
 </tbody>
 </table>
 <p>To capture this time to onset, you have to check every possibilities for a patient, e.g. you must check for all immune checkpoint inhibitor level time variables and choose which of these 3 variables you keep first, if ever more than one is available. This gives a quite heavy piece of code</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="multi_instrument_var.html#cb4-1" aria-hidden="true" tabindex="-1"></a>ti_icistart_ic <span class="ot">=</span> <span class="fu">expr</span>(<span class="fu">pmax</span>( <span class="co"># pmax here: maximum delay (in the case multiple ICI were prescribed sequentially)</span></span>
-<span id="cb4-2"><a href="multi_instrument_var.html#cb4-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">eval</span>(<span class="fu">tto_uni_3v</span>(start_days_nivo,</span>
-<span id="cb4-3"><a href="multi_instrument_var.html#cb4-3" aria-hidden="true" tabindex="-1"></a>                 start_days_nivox,</span>
-<span id="cb4-4"><a href="multi_instrument_var.html#cb4-4" aria-hidden="true" tabindex="-1"></a>                 first_doses_nivolumab_mce)), <span class="co"># identical to start_days_nivox but it is @HIDDEN</span></span>
-<span id="cb4-5"><a href="multi_instrument_var.html#cb4-5" aria-hidden="true" tabindex="-1"></a>   <span class="fu">eval</span>(<span class="fu">tto_uni_3v</span>(start_days_pem,</span>
-<span id="cb4-6"><a href="multi_instrument_var.html#cb4-6" aria-hidden="true" tabindex="-1"></a>                 start_days_pemx,</span>
-<span id="cb4-7"><a href="multi_instrument_var.html#cb4-7" aria-hidden="true" tabindex="-1"></a>                 first_doses_pembrolizumab_mce)), <span class="co"># @HIDDEN</span></span>
-<span id="cb4-8"><a href="multi_instrument_var.html#cb4-8" aria-hidden="true" tabindex="-1"></a>   <span class="fu">eval</span>(<span class="fu">tto_uni_3v</span>(start_days_pem_2, <span class="co"># Other Anti-PD1 regimen</span></span>
-<span id="cb4-9"><a href="multi_instrument_var.html#cb4-9" aria-hidden="true" tabindex="-1"></a>                 start_days_pem_2x,</span>
-<span id="cb4-10"><a href="multi_instrument_var.html#cb4-10" aria-hidden="true" tabindex="-1"></a>                 first_doses_pembrolizumab_mce_2)),<span class="co"># @HIDDEN</span></span>
-<span id="cb4-11"><a href="multi_instrument_var.html#cb4-11" aria-hidden="true" tabindex="-1"></a>   <span class="fu">eval</span>(<span class="fu">tto_uni_3v</span>(start_days_pem_3, <span class="co"># Cemiplimab </span></span>
-<span id="cb4-12"><a href="multi_instrument_var.html#cb4-12" aria-hidden="true" tabindex="-1"></a>                 start_days_pem_3x,</span>
-<span id="cb4-13"><a href="multi_instrument_var.html#cb4-13" aria-hidden="true" tabindex="-1"></a>                 first_doses_pembrolizumab_mce_3)),</span>
-<span id="cb4-14"><a href="multi_instrument_var.html#cb4-14" aria-hidden="true" tabindex="-1"></a>   <span class="fu">eval</span>(<span class="fu">tto_uni_3v</span>(start_days_atez,</span>
-<span id="cb4-15"><a href="multi_instrument_var.html#cb4-15" aria-hidden="true" tabindex="-1"></a>                 start_days_atezx,</span>
-<span id="cb4-16"><a href="multi_instrument_var.html#cb4-16" aria-hidden="true" tabindex="-1"></a>                 first_doses_atezolizumab_mce)),</span>
-<span id="cb4-17"><a href="multi_instrument_var.html#cb4-17" aria-hidden="true" tabindex="-1"></a>   <span class="fu">eval</span>(<span class="fu">tto_uni_3v</span>(start_days_ave,</span>
-<span id="cb4-18"><a href="multi_instrument_var.html#cb4-18" aria-hidden="true" tabindex="-1"></a>                 start_days_avex,</span>
-<span id="cb4-19"><a href="multi_instrument_var.html#cb4-19" aria-hidden="true" tabindex="-1"></a>                 first_doses_avelumab_mce)),</span>
-<span id="cb4-20"><a href="multi_instrument_var.html#cb4-20" aria-hidden="true" tabindex="-1"></a>   <span class="fu">eval</span>(<span class="fu">tto_uni_3v</span>(start_days_durv,</span>
-<span id="cb4-21"><a href="multi_instrument_var.html#cb4-21" aria-hidden="true" tabindex="-1"></a>                 start_days_durvx,</span>
-<span id="cb4-22"><a href="multi_instrument_var.html#cb4-22" aria-hidden="true" tabindex="-1"></a>                 first_doses_durvalumab_mce)),</span>
-<span id="cb4-23"><a href="multi_instrument_var.html#cb4-23" aria-hidden="true" tabindex="-1"></a>   <span class="fu">eval</span>(<span class="fu">tto_uni_3v</span>(start_days_durv_3,<span class="co"># Ohter Anti-PDL1</span></span>
-<span id="cb4-24"><a href="multi_instrument_var.html#cb4-24" aria-hidden="true" tabindex="-1"></a>                 start_days_durv_3x,</span>
-<span id="cb4-25"><a href="multi_instrument_var.html#cb4-25" aria-hidden="true" tabindex="-1"></a>                 first_doses_durvalumab_mce_3)),</span>
-<span id="cb4-26"><a href="multi_instrument_var.html#cb4-26" aria-hidden="true" tabindex="-1"></a>   <span class="fu">eval</span>(<span class="fu">tto_uni_3v</span>(start_days_ipi,</span>
-<span id="cb4-27"><a href="multi_instrument_var.html#cb4-27" aria-hidden="true" tabindex="-1"></a>                 start_days_ipix,</span>
-<span id="cb4-28"><a href="multi_instrument_var.html#cb4-28" aria-hidden="true" tabindex="-1"></a>                 first_doses_ipilimumab_mce)),</span>
-<span id="cb4-29"><a href="multi_instrument_var.html#cb4-29" aria-hidden="true" tabindex="-1"></a>   <span class="fu">eval</span>(<span class="fu">tto_uni_3v</span>(start_days_trem,</span>
-<span id="cb4-30"><a href="multi_instrument_var.html#cb4-30" aria-hidden="true" tabindex="-1"></a>                 start_days_tremx,</span>
-<span id="cb4-31"><a href="multi_instrument_var.html#cb4-31" aria-hidden="true" tabindex="-1"></a>                 first_doses_tremelimumab_mce)),</span>
-<span id="cb4-32"><a href="multi_instrument_var.html#cb4-32" aria-hidden="true" tabindex="-1"></a>   <span class="fu">eval</span>(<span class="fu">tto_uni_3v</span>(start_days_trem_2, <span class="co"># Other Anti-CTLA4</span></span>
-<span id="cb4-33"><a href="multi_instrument_var.html#cb4-33" aria-hidden="true" tabindex="-1"></a>                 start_days_trem_2x,</span>
-<span id="cb4-34"><a href="multi_instrument_var.html#cb4-34" aria-hidden="true" tabindex="-1"></a>                 first_doses_tremelimumab_mce_2)),</span>
-<span id="cb4-35"><a href="multi_instrument_var.html#cb4-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">na.rm =</span> <span class="cn">TRUE</span></span>
-<span id="cb4-36"><a href="multi_instrument_var.html#cb4-36" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">-</span> <span class="co"># look at the minus!! Shall we keep it? 2022-09-16</span></span>
-<span id="cb4-37"><a href="multi_instrument_var.html#cb4-37" aria-hidden="true" tabindex="-1"></a>    <span class="fu">eval</span>(<span class="fu">numvar_uni</span>(cardiotox_days_1,</span>
-<span id="cb4-38"><a href="multi_instrument_var.html#cb4-38" aria-hidden="true" tabindex="-1"></a>                    cardiotox_days_1x))</span>
-<span id="cb4-39"><a href="multi_instrument_var.html#cb4-39" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Number of days before presentation that Myocarditis symptoms began</span></span>
-<span id="cb4-40"><a href="multi_instrument_var.html#cb4-40" aria-hidden="true" tabindex="-1"></a>     </span>
-<span id="cb4-41"><a href="multi_instrument_var.html#cb4-41" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
-<p>Where <code>eval(tto_univ_3v())</code> would be a prioritizer function among the 3 variables. Note that we might want to substract the <code>cardiotox_days_1</code> delay, if we’re interested in the beginning of symptoms rather than index date of referral.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="multi_instrument_var.html#cb4-1" aria-hidden="true" tabindex="-1"></a>ti_cl1stici_ic <span class="ot">=</span> <span class="fu">expr</span>(<span class="fu">pmax</span>( <span class="co"># pmax here: maximum delay (in the case multiple ICI were prescribed sequentially)</span></span>
+<span id="cb4-2"><a href="multi_instrument_var.html#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="multi_instrument_var.html#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">eval</span>(<span class="fu">tto_uni_3v</span>(ti_cl1statez_ic__c, ti_cl1statez_ic, ti_cl1statez_ic__old)), </span>
+<span id="cb4-4"><a href="multi_instrument_var.html#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">eval</span>(<span class="fu">tto_uni_3v</span>(ti_cl1stavel_ic__c, ti_cl1stavel_ic, ti_cl1stavel_ic__old)), </span>
+<span id="cb4-5"><a href="multi_instrument_var.html#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">eval</span>(<span class="fu">tto_uni_3v</span>(ti_cl1stcemi_ic__c, ti_cl1stcemi_ic, ti_cl1stcemi_ic__old)), </span>
+<span id="cb4-6"><a href="multi_instrument_var.html#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">eval</span>(<span class="fu">tto_uni_3v</span>(ti_cl1stdurv_ic__c, ti_cl1stdurv_ic, ti_cl1stdurv_ic__old)), </span>
+<span id="cb4-7"><a href="multi_instrument_var.html#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">eval</span>(<span class="fu">tto_uni_3v</span>(ti_cl1stipil_ic__c, ti_cl1stipil_ic, ti_cl1stipil_ic__old)), </span>
+<span id="cb4-8"><a href="multi_instrument_var.html#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">eval</span>(<span class="fu">tto_uni_3v</span>(ti_cl1stnivo_ic__c, ti_cl1stnivo_ic, ti_cl1stnivo_ic__old)), </span>
+<span id="cb4-9"><a href="multi_instrument_var.html#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">eval</span>(<span class="fu">tto_uni_3v</span>(ti_cl1stpemb_ic__c, ti_cl1stpemb_ic, ti_cl1stpemb_ic__old)), </span>
+<span id="cb4-10"><a href="multi_instrument_var.html#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">eval</span>(<span class="fu">tto_uni_3v</span>(ti_cl1sttrem_ic__c, ti_cl1sttrem_ic, ti_cl1sttrem_ic__old)), </span>
+<span id="cb4-11"><a href="multi_instrument_var.html#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">eval</span>(<span class="fu">tto_uni_3v</span>(ti_cl1stpd1_other_ic__c, ti_cl1stpd1_other_ic, </span>
+<span id="cb4-12"><a href="multi_instrument_var.html#cb4-12" aria-hidden="true" tabindex="-1"></a>        ti_cl1stpd1_other_ic__old)), </span>
+<span id="cb4-13"><a href="multi_instrument_var.html#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">eval</span>(<span class="fu">tto_uni_3v</span>(ti_cl1stpdl1_other_ic__c, </span>
+<span id="cb4-14"><a href="multi_instrument_var.html#cb4-14" aria-hidden="true" tabindex="-1"></a>        ti_cl1stpdl1_other_ic, ti_cl1stpdl1_other_ic__old)), </span>
+<span id="cb4-15"><a href="multi_instrument_var.html#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">eval</span>(<span class="fu">tto_uni_3v</span>(ti_cl1stctla4_other_ic__c, ti_cl1stctla4_other_ic, </span>
+<span id="cb4-16"><a href="multi_instrument_var.html#cb4-16" aria-hidden="true" tabindex="-1"></a>        ti_cl1stctla4_other_ic__old)), </span>
+<span id="cb4-17"><a href="multi_instrument_var.html#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-18"><a href="multi_instrument_var.html#cb4-18" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<p>Where <code>eval(tto_univ_3v())</code> would be a prioritizer function among the 3 variables. Note that we might want to substract the <code>ti_icsy_ic</code> delay, if we’re interested in the beginning of symptoms rather than index cardiotoxicity date.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="multi_instrument_var.html#cb5-1" aria-hidden="true" tabindex="-1"></a>tto_uni_3v <span class="ot">&lt;-</span> <span class="co"># A 3 variables time to onset unifier !</span></span>
+<span id="cb5-2"><a href="multi_instrument_var.html#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>( <span class="co"># used to organize the three variables of time to cardiotox onset from drug initiation</span></span>
+<span id="cb5-3"><a href="multi_instrument_var.html#cb5-3" aria-hidden="true" tabindex="-1"></a>    ti_icistart_event__c, <span class="co"># all quasi quoted names of columns from data. One is the calculated delay `ti_icistart_event__c`, one is manually entered when dates are not available `ti_icistart_event`, one is a old version of the variable `ti_icistart_event__old`</span></span>
+<span id="cb5-4"><a href="multi_instrument_var.html#cb5-4" aria-hidden="true" tabindex="-1"></a>    ti_icistart_event,</span>
+<span id="cb5-5"><a href="multi_instrument_var.html#cb5-5" aria-hidden="true" tabindex="-1"></a>    ti_icistart_event__old</span>
+<span id="cb5-6"><a href="multi_instrument_var.html#cb5-6" aria-hidden="true" tabindex="-1"></a>  ){</span>
+<span id="cb5-7"><a href="multi_instrument_var.html#cb5-7" aria-hidden="true" tabindex="-1"></a>    ti_icistart_event__c <span class="ot">&lt;-</span> <span class="fu">enexpr</span>(ti_icistart_event__c)</span>
+<span id="cb5-8"><a href="multi_instrument_var.html#cb5-8" aria-hidden="true" tabindex="-1"></a>    ti_icistart_event <span class="ot">&lt;-</span> <span class="fu">enexpr</span>(ti_icistart_event)</span>
+<span id="cb5-9"><a href="multi_instrument_var.html#cb5-9" aria-hidden="true" tabindex="-1"></a>    ti_icistart_event__old <span class="ot">&lt;-</span> <span class="fu">enexpr</span>(ti_icistart_event__old)</span>
+<span id="cb5-10"><a href="multi_instrument_var.html#cb5-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-11"><a href="multi_instrument_var.html#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># underlying logic: </span></span>
+<span id="cb5-12"><a href="multi_instrument_var.html#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># first, prioritize calculated over manual vars with numvar_uni (intermediate object uni).</span></span>
+<span id="cb5-13"><a href="multi_instrument_var.html#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># second, take the longest delay of uni and __old, if both are available.</span></span>
+<span id="cb5-14"><a href="multi_instrument_var.html#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># third, if only one available, keep it (via na.rm = TRUE in pmax)</span></span>
+<span id="cb5-15"><a href="multi_instrument_var.html#cb5-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-16"><a href="multi_instrument_var.html#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># generate an expression to call numvar_uni</span></span>
+<span id="cb5-17"><a href="multi_instrument_var.html#cb5-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-18"><a href="multi_instrument_var.html#cb5-18" aria-hidden="true" tabindex="-1"></a>    uni <span class="ot">&lt;-</span> <span class="fu">numvar_uni</span>(<span class="sc">!!</span>ti_icistart_event__c,</span>
+<span id="cb5-19"><a href="multi_instrument_var.html#cb5-19" aria-hidden="true" tabindex="-1"></a>                      <span class="sc">!!</span>ti_icistart_event)</span>
+<span id="cb5-20"><a href="multi_instrument_var.html#cb5-20" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-21"><a href="multi_instrument_var.html#cb5-21" aria-hidden="true" tabindex="-1"></a>    ex <span class="ot">&lt;-</span> <span class="fu">quo</span>(<span class="fu">pmax</span>(</span>
+<span id="cb5-22"><a href="multi_instrument_var.html#cb5-22" aria-hidden="true" tabindex="-1"></a>      <span class="fu">eval</span>(uni),</span>
+<span id="cb5-23"><a href="multi_instrument_var.html#cb5-23" aria-hidden="true" tabindex="-1"></a>      <span class="fu">as.numeric</span>(<span class="sc">!!</span>ti_icistart_event__old),</span>
+<span id="cb5-24"><a href="multi_instrument_var.html#cb5-24" aria-hidden="true" tabindex="-1"></a>      <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb5-25"><a href="multi_instrument_var.html#cb5-25" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb5-26"><a href="multi_instrument_var.html#cb5-26" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-27"><a href="multi_instrument_var.html#cb5-27" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-28"><a href="multi_instrument_var.html#cb5-28" aria-hidden="true" tabindex="-1"></a>    ex</span>
+<span id="cb5-29"><a href="multi_instrument_var.html#cb5-29" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb5-30"><a href="multi_instrument_var.html#cb5-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-31"><a href="multi_instrument_var.html#cb5-31" aria-hidden="true" tabindex="-1"></a>numvar_uni <span class="ot">&lt;-</span> <span class="co"># Numeric variables unifier</span></span>
+<span id="cb5-32"><a href="multi_instrument_var.html#cb5-32" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>( <span class="co"># used to organize data entered from 2 variables, currently its a prioritization</span></span>
+<span id="cb5-33"><a href="multi_instrument_var.html#cb5-33" aria-hidden="true" tabindex="-1"></a>    var1, <span class="co"># all quasi quoted names of columns from data. usually, one is the calculated var, one is manually entered, var1 will be prioritize over var2</span></span>
+<span id="cb5-34"><a href="multi_instrument_var.html#cb5-34" aria-hidden="true" tabindex="-1"></a>    var2</span>
+<span id="cb5-35"><a href="multi_instrument_var.html#cb5-35" aria-hidden="true" tabindex="-1"></a>    <span class="co"># underlying data.frame data argument is omitted</span></span>
+<span id="cb5-36"><a href="multi_instrument_var.html#cb5-36" aria-hidden="true" tabindex="-1"></a>  ){</span>
+<span id="cb5-37"><a href="multi_instrument_var.html#cb5-37" aria-hidden="true" tabindex="-1"></a>    var1 <span class="ot">&lt;-</span> <span class="fu">enexpr</span>(var1)</span>
+<span id="cb5-38"><a href="multi_instrument_var.html#cb5-38" aria-hidden="true" tabindex="-1"></a>    var2 <span class="ot">&lt;-</span> <span class="fu">enexpr</span>(var2)</span>
+<span id="cb5-39"><a href="multi_instrument_var.html#cb5-39" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-40"><a href="multi_instrument_var.html#cb5-40" aria-hidden="true" tabindex="-1"></a>    ex <span class="ot">&lt;-</span> <span class="fu">expr</span>(<span class="fu">case_when</span>(</span>
+<span id="cb5-41"><a href="multi_instrument_var.html#cb5-41" aria-hidden="true" tabindex="-1"></a>      <span class="sc">!</span><span class="fu">is.na</span>(<span class="sc">!!</span>var1) <span class="sc">~</span> <span class="fu">as.numeric</span>(<span class="sc">!!</span>var1),</span>
+<span id="cb5-42"><a href="multi_instrument_var.html#cb5-42" aria-hidden="true" tabindex="-1"></a>      <span class="sc">!</span><span class="fu">is.na</span>(<span class="sc">!!</span>var2) <span class="sc">~</span> <span class="fu">as.numeric</span>(<span class="sc">!!</span>var2),</span>
+<span id="cb5-43"><a href="multi_instrument_var.html#cb5-43" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA_real_</span></span>
+<span id="cb5-44"><a href="multi_instrument_var.html#cb5-44" aria-hidden="true" tabindex="-1"></a>    ))</span>
+<span id="cb5-45"><a href="multi_instrument_var.html#cb5-45" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-46"><a href="multi_instrument_var.html#cb5-46" aria-hidden="true" tabindex="-1"></a>    ex</span>
+<span id="cb5-47"><a href="multi_instrument_var.html#cb5-47" aria-hidden="true" tabindex="-1"></a>  }</span></code></pre></div>
 </div>
 <div id="death" class="section level2 hasAnchor" number="11.3">
 <h2><span class="header-section-number">11.3</span> Death<a href="multi_instrument_var.html#death" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -429,53 +419,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p><code>ih_ou_death</code> : During index hospitalization</p></li>
 <li><p><code>fu_death</code> : During follow-up (later than discharge)</p></li>
 </ul>
-</div>
-<div id="electrocardiograms" class="section level2 hasAnchor" number="11.4">
-<h2><span class="header-section-number">11.4</span> Electrocardiograms<a href="multi_instrument_var.html#electrocardiograms" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ul>
-<li><p><code>be</code> : Baseline (before immune checkpoint inhibitor current cycle 1st infusion)</p></li>
-<li><p><code>be2</code> : The same +++ it is a duplicate in a separate instrument (should be merged in the future). There are more features here.</p></li>
-<li><p><code>ie</code> : Index cardiotoxicity (1st EKG at the time of cardiotoxicity diagnosis)</p></li>
-<li><p><code>ie2</code> : The same ++ it is a duplicate in a separate instrument (should be merged in the future). There are more features here.</p></li>
-<li><p><code>ih_ekg</code> : Additional EKG(s) during index hospitalization</p></li>
-<li><p><code>fu_ekg</code> : Most recent EKG during follow-up</p></li>
-</ul>
-<div id="features" class="section level3 hasAnchor" number="11.4.1">
-<h3><span class="header-section-number">11.4.1</span> Features<a href="multi_instrument_var.html#features" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<table>
-<colgroup>
-<col width="36%" />
-<col width="63%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Variable</th>
-<th>Definition</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>exist</code></td>
-<td>Availability of said EKG</td>
-</tr>
-<tr class="even">
-<td><code>analysis</code></td>
-<td>All EKG diagnoses (rhythm, durations, repolarization…)</td>
-</tr>
-<tr class="odd">
-<td><p><code>cornell_voltage</code></p>
-<p><code>sokolow_lyon_voltage</code></p>
-<p><code>heart_rate</code></p>
-<p><code>pr_duration</code></p>
-<p><code>qrs_duration</code></p>
-<p><code>qt_duration (also qtcb, qtcf)</code></p></td>
-<td>Numeric features (only available for <code>be2</code> and <code>ie2</code>)</td>
-</tr>
-</tbody>
-</table>
-<p>Also, timings according to index cardiotoxicity, and upload variables.</p>
 
-</div>
 </div>
 </div>
             </section>
