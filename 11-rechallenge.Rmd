@@ -1,0 +1,26 @@
+# Rechallenge {#rechallenge}
+
+This is a distinct survey, almost as large as the main one. The study is conducted by YC Chen. The title is quite explicit, the idea is to collect data around the rechallenge process of ICI following myocarditis.
+
+## Accessing the survey
+
+There are many ways to access this specific survey.
+
+From the main survey, you can click "yes" to the question "Did this patient receive additional doses of immune checkpoint inhibitor after hospital discharge?", then save the survey. (variable name is `fu_rechallenge_exist`)
+
+You will see the completion page, inviting you to fill the rechallenge survey.
+
+If you already reported the case and want to update:
+
+-   You already know the access code of the main survey or the record_id, then you may ask the access code for the rechallenge survey to YC Chen
+-   You don't know either of the above, then ask YC Chen the complete list of the cases from your institution with basic data (age, sex, cancer), and try to match your case in the list.
+
+> The `fu_rechallenge_exist` variable may be left empty if you access the rechallenge survey directly. So do NOT rely on it to estimate the proportion of rechallenge versus the total number of reports.
+
+## Duplicated data
+
+There is a risk the same data in the rechallenge survey duplicates those of the main survey.
+
+For example, say you have a patient that experienced myocarditis on February 2022, was rechallenged on March, had a recurrence of myocarditis on April and was last seen alive on October 2022.
+
+Both in the main survey and in the rechallenge survey, we're asking for date of last known medical contact, which will be October 2022. It the patient happens to have his/her worst MRI on October 2022, then this data will be duplicated too.
